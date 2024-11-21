@@ -1,41 +1,27 @@
-console.log("contact")
+import {defineElement, insertElement} from "./modules.js"
+import contactImg from "./ressources/contact.jpg";
 
-// h1 = contact
-// image
-// contact-info
-// >> create a function that I can call in script.js
-
-// create objects with the properties required for the DOM elements
-function defineElement(tag, className, textContent, parentSelector, src, alt) {
-    return {
-      tag,
-      className,
-      textContent,
-      parentSelector,
-      src,
-      alt,
-    };
+function createContact() {
+    // define the required Elements
+    const elements = [
+        defineElement(".content", "div", "contact"),
+            defineElement(".contact", "h1", "title", "Grande Amore"),
+            defineElement(".contact", "img", "fullImage", "", contactImg, "contactImg"),
+            defineElement(".contact", "div", "innsbruck"),
+                defineElement(".innsbruck", "h2", "info", "Innsbruck"),
+                defineElement(".innsbruck", "div", "info", 
+                    "Streetofthestreets 1<br>0678/987654321<br>Open 24/7"),
+            defineElement(".contact", "div", "imst"),
+                defineElement(".imst", "h2", "info", "Imst"),
+                defineElement(".imst", "div", "info", 
+                    "Streetofthestreets 1<br>0678/987654321<br>Open 24/7"),
+            defineElement(".contact", "div", "stanton"),
+                defineElement(".stanton", "h2", "info", "St. Anton"),
+                defineElement(".stanton", "div", "info", 
+                    "Streetofthestreets 1<br>0678/987654321<br>Open 24/7"),
+    ]
+    // generate the elements in the DOM
+    elements.forEach((element) => insertElement(element))
 }
 
-// create the DOM elements with the properties of the objects
-function makeElement({ tag = "div", className, textContent, parentSelector, src, alt }) {
-    const newChild = document.createElement(tag);
-    newChild.classList.add(className);
-    newChild.textContent = textContent;
-    newChild.src = src;
-    newChild.alt = alt;
-    
-    const parentElement = document.querySelector(parentSelector);
-    parentElement.appendChild(newChild);
-}
-
-// define the required Elements
-const element1 = defineElement("div", "title", "Element1", ".content");
-const element2 = defineElement("img", "image", "Element2", ".content", "https://cdn.pixabay.com/photo/2014/10/03/07/56/coffee-471166_1280.jpg", "Pizza");
-
-// generate the elements in the DOM
-makeElement(element1);
-makeElement(element2);
-
-// export the functions to the other scripts
-export {defineElement, makeElement};
+export {createContact};
